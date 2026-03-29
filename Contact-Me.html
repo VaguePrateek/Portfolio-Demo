@@ -14,6 +14,16 @@
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="style_Contact-Me.css" />
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "xRRxj0U4S-fqXP2m4",
+      });
+   })();
+</script>
 </head>
 
 <body>
@@ -80,24 +90,24 @@
             <h1>Get in Touch</h1>
             <p>Feel free to reach out via email or phone.</p>
 
-            <form>
+            <form id="contact-form">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" id="name" name="name" placeholder="Enter your name">
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email">
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
                 </div>
 
                 <div class="form-group">
                     <label for="message">Message</label>
-                    <textarea id="message" name="message" placeholder="Type your message"></textarea>
+                    <textarea id="message" name="message" placeholder="Type your message" required></textarea>
                 </div>
 
                 <div class="checkbox">
-                    <input type="checkbox" id="terms" name="terms">
+                    <input type="checkbox" id="terms" name="terms" required>
                     <label for="terms">I accept the Terms</label>
                 </div>
 
@@ -153,6 +163,17 @@
 
     </footer>
     <script>
+        window.onload = function() {
+            document.getElementById('contact-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                emailjs.sendForm('service_ylx8uem', 'template_akskzfq', this)
+                    .then(function() {
+                        alert('Message sent successfully!');
+                    }, function(error) {
+                        alert('Failed to send message. Please try again later.');
+                    });
+            });
+        }
         function showSidebar() {
             event.preventDefault();
             navbar = document.querySelector('.sidebar')
