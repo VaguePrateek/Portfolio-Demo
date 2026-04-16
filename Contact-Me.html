@@ -14,13 +14,14 @@
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="style_Contact-Me.css" />
+<script type="text/javascript" src="config.js"></script>
 <script type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
 </script>
 <script type="text/javascript">
    (function(){
       emailjs.init({
-        publicKey: "xRRxj0U4S-fqXP2m4",
+        publicKey: ENV.EMAILJS_PUBLIC_KEY,
       });
    })();
 </script>
@@ -166,7 +167,7 @@
         window.onload = function() {
             document.getElementById('contact-form').addEventListener('submit', function(event) {
                 event.preventDefault();
-                emailjs.sendForm('service_ylx8uem', 'template_akskzfq', this)
+                emailjs.sendForm(ENV.EMAILJS_SERVICE_ID, ENV.EMAILJS_TEMPLATE_ID, this)
                     .then(function() {
                         alert('Message sent successfully!');
                     }, function(error) {
